@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8879710651584865535}
   - component: {fileID: 4189648001817490818}
   - component: {fileID: 1600567487375942723}
+  - component: {fileID: 3801786121546229137}
   m_Layer: 0
   m_Name: IceSprite
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8879710651584865535
 SpriteRenderer:
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 503245670, guid: e74b518a65bc45f4cace9a2fef6af29d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -158,3 +159,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3801786121546229137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351499397492638919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ec7ad611629114eae99d93caf8a65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 547f74ba9c335b346bd6e005dfb3e8ac, type: 3}
+  - {fileID: 21300000, guid: 2c0b6da58015b8a4fb32b2447a40bd8d, type: 3}
+  - {fileID: 21300000, guid: 5e2e0b3ea4ede9444965c39190586fea, type: 3}
