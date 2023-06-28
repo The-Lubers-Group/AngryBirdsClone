@@ -6,6 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Inicial.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level1_Mestra1.unity
+    guid: 7b49a22dfd3363c4898116afa5d475d1
+  - enabled: 1
+    path: Assets/Scenes/Level2_Mestra1.unity
+    guid: 60b693d8870c4cc458c73233d1995560
+  - enabled: 1
+    path: Assets/Scenes/Level3_Mestra2.unity
+    guid: 3f3441515e15b9c4aa13adc492ee3564
+  - enabled: 1
+    path: Assets/Scenes/Level4_Mestra2.unity
+    guid: cff41c66bc85e2246a772583311a374d
+  - enabled: 1
+    path: Assets/Scenes/MenuPrincipal.unity
+    guid: d344f497213b10340a28b2aeedd71609
+  - enabled: 1
+    path: Assets/Scenes/MenuFases.unity
+    guid: 9bf75c1f3be663148b2d4bdafca06838
+  - enabled: 1
+    path: Assets/Scenes/Mestra1.unity
+    guid: 11090c13e13d25541b8245471cdbfbd7
+  - enabled: 1
+    path: Assets/Scenes/Mestra2.unity
+    guid: bcf0a86dbb5505a4eadb0c6a07e7961a
+  - enabled: 1
+    path: Assets/Scenes/Loja.unity
+    guid: 884b1debd3838ad42906710829835117
   m_configObjects: {}

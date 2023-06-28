@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class CameraSegue : MonoBehaviour
 {
-    [SerializeField]
-    private Transform objE, objD, passaro;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	private float t = 1;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(passaro != null)
-        {
-            Vector3 posCam = transform.position;
-            posCam.x = passaro.position.x;
-            posCam.x = Mathf.Clamp(posCam.x, objE.position.x, objD.position.x);
-            transform.position = posCam;
-        }
-       
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		if ( !GameManager.instance.pausado )
+		{
+			if ( transform.position.x != GameManager.instance.objE.position.x && GameManager.instance.passaroLancado == false )
+			{
+				t -= 0.05f * Time.deltaTime;
+				transform.position = new Vector3( Mathf.SmoothStep( GameManager.instance.objE.position.x, Camera.main.transform.position.x, t ), transform.position.y, transform.position.z );
+			}
+			else
+			{
+				t = 1;
+			}
+		}
+	}
 }

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4189648001817490818}
   - component: {fileID: 1600567487375942723}
   - component: {fileID: 3801786121546229137}
+  - component: {fileID: 1744569621989042863}
   m_Layer: 0
   m_Name: IceSprite
-  m_TagString: Untagged
+  m_TagString: Destrutivel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8879710651584865535
 SpriteRenderer:
@@ -171,7 +172,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ec7ad611629114eae99d93caf8a65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: 1000
   sprites:
   - {fileID: 21300000, guid: 547f74ba9c335b346bd6e005dfb3e8ac, type: 3}
   - {fileID: 21300000, guid: 2c0b6da58015b8a4fb32b2447a40bd8d, type: 3}
   - {fileID: 21300000, guid: 5e2e0b3ea4ede9444965c39190586fea, type: 3}
+  EfeitoDestruido: {fileID: 6838977309909389162, guid: b74fb9b77b7506443879983b933eac42, type: 3}
+  EfeitoScore1000: {fileID: 1783961414034860305, guid: 01d6b153a226eaf46b41e6e765fae608, type: 3}
+  EfeitoScore5000: {fileID: 6580976103171890696, guid: 6434d07f80b76104d8509b1cace00ca4, type: 3}
+  audioObj: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 5166597e55a9f9249ba7c874cdd1be1c, type: 3}
+  - {fileID: 8300000, guid: dcf1d30b71f9951438fef4bda8906a83, type: 3}
+--- !u!82 &1744569621989042863
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7351499397492638919}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

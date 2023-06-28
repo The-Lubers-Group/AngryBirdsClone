@@ -3,7 +3,10 @@ guid: 92ec7ad611629114eae99d93caf8a65b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - EfeitoDestruido: {fileID: 6838977309909389162, guid: b74fb9b77b7506443879983b933eac42, type: 3}
+  - EfeitoScore1000: {fileID: 1783961414034860305, guid: 01d6b153a226eaf46b41e6e765fae608, type: 3}
+  - EfeitoScore5000: {fileID: 6580976103171890696, guid: 6434d07f80b76104d8509b1cace00ca4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
