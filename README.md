@@ -15,7 +15,7 @@ An Android game application that is a clone of the famous game Angry Birds
 
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png"
     alt="Get it on GitHub"
-    height="80">](https://github.com/The-Lubers-Group/2DFootball/releases/latest)
+    height="80">](https://github.com/The-Lubers-Group/AngryBirdsClone/releases/latest)
 ## Features
 - 4 levels 
 - Scroll Background
