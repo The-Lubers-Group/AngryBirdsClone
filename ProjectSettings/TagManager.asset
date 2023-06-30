@@ -39,6 +39,10 @@ TagManager:
   - UIBtnBackLoja
   - UIBtnBackFases
   - UIBtnBackLevel
+  - UIBtnInfoMainMenu
+  - UIBtnSoundMainMenu
+  - MorreX
+  - MorteArea
   layers:
   - Default
   - TransparentFX
