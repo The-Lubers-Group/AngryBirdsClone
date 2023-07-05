@@ -7,24 +7,19 @@ public class MorteArea : MonoBehaviour
 {
 	private void OnCollisionEnter2D( Collision2D collision )
 	{
-		if (collision.gameObject.CompareTag("Passaro"))
-			{
-            Destroy(collision.gameObject);
-			}
-		else if (collision.gameObject.CompareTag("Destrutivel"))
-			{
-			ImpactCod obj = collision.gameObject.GetComponent<ImpactCod>();
-			obj.ProcesarMorte();
-			}
-		else if (collision.gameObject.CompareTag("InimigoPorco"))
-			{
-			ImpactAnimaPorco obj = collision.gameObject.GetComponent<ImpactAnimaPorco>();
-			obj.ProcesarMorte();
-			}
+		if(collision.gameObject.CompareTag("Passaro"))
+		{
+			Destroy( collision.gameObject );
+		}
+		else if (collision.gameObject.CompareTag("Destrutivel") || collision.gameObject.CompareTag("InimigoPorco"))
+		{
+			IDamageable obj = collision.gameObject.GetComponent<IDamageable>();
+			obj.ProcessarMorte();
+		}
 		else if (collision.gameObject.CompareTag("Player"))
-			{
+		{
 			Drag drag = collision.gameObject.GetComponent<Drag>();
-			drag.MataPassaro();
-			}
+			drag.StartCoroutine(drag.TempoMorte());
+		}
 	}
 }

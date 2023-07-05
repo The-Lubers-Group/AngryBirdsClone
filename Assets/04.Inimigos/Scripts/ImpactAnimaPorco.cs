@@ -4,24 +4,25 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class ImpactAnimaPorco : MonoBehaviour
+public class ImpactAnimaPorco : MonoBehaviour, IDamageable
 {
 	Animator animacoes;
 	int limite = -1;
 	public int Score = 5000;
 	public string[] clips;
 	private bool vivo = true;
+	public float resistenciaMax = 70f;
+	public float resistenciaMin = 16f;
+		
 	[SerializeField] GameObject EfeitoDestruido, EfeitoScore1000, EfeitoScore5000;
-    // Start is called before the first frame update
-    void Start()
+   
+    void Awake()
     {
         animacoes = GetComponent<Animator>();
     }
 
-	 private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.relativeVelocity.magnitude > 4 && collision.relativeVelocity.magnitude < 12)
-		{
+	public void Danificar()
+	{
             if (limite < clips.Length - 1)
 			{
                 limite++;
@@ -29,16 +30,42 @@ public class ImpactAnimaPorco : MonoBehaviour
             }
             else if(limite ==  clips.Length - 1)
             {
-                ProcesarMorte();
+                ProcessarMorte();
             }
-        }
-        else if(collision.relativeVelocity.magnitude > 12 || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("clone"))
-        {
-            ProcesarMorte(); 
+	}
+	 private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ( collision.rigidbody != null )
+		{
+			Damage(collision.rigidbody);
+		}
+		else
+		{
+			if(collision.gameObject.name == "Floor" )
+			{
+				if(collision.relativeVelocity.sqrMagnitude > resistenciaMin && collision.relativeVelocity.sqrMagnitude <= resistenciaMax )
+				{
+					Danificar();
+				}
+				else if(collision.relativeVelocity.sqrMagnitude > resistenciaMax)
+				{
+					ProcessarMorte();
+				}
+			}
 		}
     }
-
-	public void ProcesarMorte()
+	public void Damage(Rigidbody2D rigidB)
+	{
+		if ((rigidB.velocity.sqrMagnitude > resistenciaMin && rigidB.velocity.sqrMagnitude <= resistenciaMax) || rigidB.gameObject.CompareTag("Bomba"))
+        {
+            Danificar();
+        }
+        else if(rigidB.velocity.sqrMagnitude > resistenciaMax || rigidB.gameObject.CompareTag("Player") || rigidB.gameObject.CompareTag("clone"))
+        {
+			ProcessarMorte();  
+        }
+	}
+	public void ProcessarMorte()
 	{
 		if ( vivo )
 		{
@@ -53,8 +80,6 @@ public class ImpactAnimaPorco : MonoBehaviour
 				Instantiate(EfeitoScore5000, new Vector2(transform.position.x,transform.position.y), Quaternion.identity);
                     
 			}
-		
-		
 			GameManager.instance.numPorcosCena--;
 			GameManager.instance.Score = Score;
 			Destroy(gameObject);

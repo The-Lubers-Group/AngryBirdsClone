@@ -74,26 +74,33 @@ public class BombaPassaro : MonoBehaviour
 	}
 	void Explode()
 	{
-		Instantiate( bomba, transform.position, Quaternion.identity );
+		GameObject bmb = Instantiate( bomba, transform.position, Quaternion.identity );
 		Collider2D[] inExplosionRadius = Physics2D.OverlapCircleAll( transform.position, raioExplosao );
-		GetComponent<QuebraParentesco>().OnBomba();
 		passaroCol.enabled = false;
 		passaroRB.bodyType = RigidbodyType2D.Static;
+		string tagTemp = passaroRB.gameObject.tag;
+		passaroRB.gameObject.tag = bmb.gameObject.tag;
 		passaroSR.enabled = false;
 		foreach ( Collider2D obj in inExplosionRadius )
 		{
-			Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-			if ( rb != null )
+			if (obj != null)
 			{
-				Vector2 distanceVector = obj.transform.position - transform.position;
-				if ( distanceVector.magnitude > 0 )
+				Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+				IDamageable damageable = obj.GetComponent<IDamageable>();
+				damageable?.Damage(passaroRB);
+				if ( rb != null )
 				{
-					float explosionForce = forcaExplosao / distanceVector.magnitude;
-					rb.AddForce( distanceVector.normalized * explosionForce, ForceMode2D.Impulse );
+					Vector2 distanceVector = obj.transform.position - transform.position;
+					if ( distanceVector.magnitude > 0 )
+					{
+						float explosionForce = forcaExplosao / distanceVector.magnitude;
+						rb.AddForce( distanceVector.normalized * explosionForce, ForceMode2D.Impulse );
+					}
 				}
 			}
 		}
-		
+		passaroRB.gameObject.tag = tagTemp;
+	
 	}
 	//private void OnDrawGizmos()
 	//{

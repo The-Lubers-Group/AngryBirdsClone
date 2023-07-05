@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8721956866218544547}
   - component: {fileID: 8112813336996299378}
   - component: {fileID: 8213751900964225461}
-  - component: {fileID: 7066289659340908890}
   - component: {fileID: 4267704465108950755}
   - component: {fileID: 4182362495247750465}
   - component: {fileID: 1189738136266100045}
@@ -32,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 1316738035966445845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.07, y: 0.6, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: -1.33, y: 1.33, z: 1.33}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7516365376197284417}
   m_Father: {fileID: 0}
@@ -140,7 +139,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 6
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -152,28 +151,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!231 &7066289659340908890
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316738035966445845}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 0
-  m_Distance: 1
-  m_DampingRatio: 0
-  m_Frequency: 3
+  m_Constraints: 0
 --- !u!114 &4267704465108950755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,22 +164,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d38ccf3bd8bb1a4c9f02fbee036bd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valorCondLimiteX: -6.3
-  valorCondLimiteY: -4
-  layer:
+  passaroLayer:
     serializedVersion: 2
-    m_Bits: 64
-  clicked: 0
-  TempoParaMorrer: 1
-  EstaMorrendo: 0
+    m_Bits: 0
+  tempoParaMorrer: 1
+  estaMorrendo: 0
+  estouAtivo: 0
+  picked: 0
+  frequencia: 8
   lineFront: {fileID: 0}
   lineBack: {fileID: 0}
-  bomb: {fileID: 6094921971044385432, guid: 6528edb0497bfef4ca285f227f35ce52, type: 3}
+  valorCondLimiteX: -5.5
+  valorCondLimiteY: -5
+  catapultRB: {fileID: 0}
+  esticamentoMin: 1
+  efeitoDeMorte: {fileID: 6094921971044385432, guid: 6528edb0497bfef4ca285f227f35ce52, type: 3}
   audioPassaro: {fileID: 0}
   audioMortePassaro: {fileID: 2261819017381636929, guid: 97163e83738fbf64fa65838cd1a7fd74, type: 3}
-  catapultRB: {fileID: 0}
-  EstouPronto: 0
-  picked: 0
+  dotPrefab: {fileID: 6782993242019863121, guid: 377d94f3a56b9824d9d925f4dda8b8d0, type: 3}
+  pointsNum: 30
 --- !u!114 &4182362495247750465
 MonoBehaviour:
   m_ObjectHideFlags: 0

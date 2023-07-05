@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+//Esta classe controla os dados de cada nivel, agrega e habilita os botões na escena, a quantidade de estrelas e desbloqueia o proximo nivel.
 public class LevelManager : MonoBehaviour
 {
 	public static LevelManager instance;
@@ -28,7 +29,6 @@ public class LevelManager : MonoBehaviour
 		ZPlayerPrefs.SetInt( "Level2", 1 );
 		ListaAdd();
 	}
-
 	[System.Serializable]
 	public class Level
 	{
@@ -60,7 +60,6 @@ public class LevelManager : MonoBehaviour
 					level.txtAtivo = true;
 				}
 			}
-
 
 			infoBtnLevel.desbloqueadoBTN = level.desbloqueado;
 			//por padran os botoes estan sem texto habilidato
@@ -114,10 +113,5 @@ public class LevelManager : MonoBehaviour
 	{
 		SceneManager.LoadScene( level );
 	}
-	// Start is called before the first frame update
-	[ContextMenu( "Reset All  playerprefs" )]
-	void ResetPlayerPref()
-	{
-		ZPlayerPrefs.DeleteAll();
-	}
+
 }

@@ -12,10 +12,10 @@ public class CameraSegue : MonoBehaviour
 		if ( !GameManager.instance.pausado )
 		{
 			
-			if (  Mathf.FloorToInt(transform.position.x) != Mathf.FloorToInt(GameManager.instance.objE.position.x)  && !GameManager.instance.passaroLancado && !inPlace )
+			if (  Mathf.FloorToInt(transform.position.x) != Mathf.FloorToInt(GameManager.instance.CameraE.position.x)  && !GameManager.instance.passaroLancado && !inPlace )
 			{
 				t -= 0.05f * Time.deltaTime;
-				transform.position = new Vector3( Mathf.SmoothStep( GameManager.instance.objE.position.x, Camera.main.transform.position.x, t ), transform.position.y, transform.position.z );
+				transform.position = new Vector3( Mathf.SmoothStep( GameManager.instance.CameraE.position.x, Camera.main.transform.position.x, t ), transform.position.y, transform.position.z );
 			}
 			else
 			{

@@ -12,6 +12,8 @@ public class CoinManager : MonoBehaviour
 {
 	public static CoinManager instance;
 	public Money moneyDisplay = null;
+	public TextMeshProUGUI textLoja;
+	public Animator animatorTextLoja;
 	private void Awake()
 	{
 		if (instance == null )
@@ -38,7 +40,13 @@ public class CoinManager : MonoBehaviour
 		if(cena.name == "Loja" || cena.name == "MenuFases")
 		{
 			moneyDisplay = GameObject.FindWithTag("UIMoeda").GetComponent<Money>();
+			if (cena.name == "Loja")
+			{
+				textLoja = GameObject.FindWithTag("UILojaText").GetComponent<TextMeshProUGUI>();
+				animatorTextLoja = textLoja.GetComponent<Animator>();
+			}
 		}
+		
 	}
 	public void SalvarDados(int moeda )
 	{
@@ -72,7 +80,20 @@ public class CoinManager : MonoBehaviour
 		novoVal = tempMoedasTotal - valor;
 		SalvarDados(novoVal);
 		moneyDisplay?.AtualizaValor();
+		textLoja.text = "Comprado";
+		animatorTextLoja.Play("notificationAnim");
 	}
+	public void NotMoney()
+	{
+		textLoja.text = "Moedas Insuficientes";
+		animatorTextLoja.Play("notificationAnim");
+	}
+
+	public void setText(string txt)
+	{
+		textLoja.text = txt;
+	}
+
 	[Serializable]
 	class Dados
 	{

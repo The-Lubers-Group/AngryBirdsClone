@@ -58,7 +58,7 @@ public class DragCamera2DInspector : Editor {
             dc2d.keyboardInput = EditorGUILayout.Toggle(new GUIContent("Keyboard Input", "Enable or disable Keyboard input"), dc2d.keyboardInput);
             dc2d.inverseKeyboard = EditorGUILayout.Toggle(new GUIContent("Invert Keyboard Direction", "Invert keyboard direction"), dc2d.inverseKeyboard);
 
-            GUI.enabled = false;
+            GUI.enabled = true;
             dc2d.touchEnabled = EditorGUILayout.Toggle(new GUIContent("Touch Enabled", "Enable or disable touch input (PRO)"), dc2d.touchEnabled);
             dc2d.touchDragSpeed = EditorGUILayout.Slider(new GUIContent("Touch Drag Speed", "Drag Speed for touch controls (PRO)"), dc2d.touchDragSpeed, -5, 5);
             GUI.enabled = true;

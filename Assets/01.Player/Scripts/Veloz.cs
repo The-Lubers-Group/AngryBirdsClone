@@ -9,6 +9,7 @@ public class Veloz : MonoBehaviour
     public bool libera = false;
     public int trava = 0;
     private Touch touch;
+	[SerializeField] private float fatorVelocidade = 3.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +49,7 @@ public class Veloz : MonoBehaviour
     {
         if (libera)
         {
-            passaroRB.velocity = passaroRB.velocity * 2.5f;
+            passaroRB.velocity = passaroRB.velocity * fatorVelocidade;
             libera = false;
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ImpactCod : MonoBehaviour
+public class ImpactCod : MonoBehaviour, IDamageable
 {
     private int limite;
     public int Score = 1000;
@@ -14,9 +14,10 @@ public class ImpactCod : MonoBehaviour
 	[SerializeField] private AudioSource audioObj;
 	[SerializeField] private AudioClip[] clips;
 	private bool vivo = true;
+	public float resistenciaMax = 70f;
+	public float resistenciaMin = 16f;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         limite = 0;
         spriteR = GetComponent<SpriteRenderer>();
@@ -25,26 +26,51 @@ public class ImpactCod : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.magnitude > 4 && collision.relativeVelocity.magnitude < 10)
-        {
-            if (limite < sprites.Length - 1)
-            {
-                limite++;
-                spriteR.sprite = sprites[limite];
-				audioObj.clip = clips[0];
-				audioObj.Play();
-            }
-            else if(limite ==  sprites.Length - 1)
-            {
-				ProcesarMorte();
-            }
-        }
-        else if(collision.relativeVelocity.magnitude > 12 && collision.gameObject.CompareTag("Player"))
-        {
-         ProcesarMorte();  
-        }
+		if ( collision.rigidbody != null )
+		{
+			Damage(collision.rigidbody);
+		}
+		else
+		{
+			if(collision.gameObject.name == "Floor" )
+			{
+				if(collision.relativeVelocity.sqrMagnitude > 16 && collision.relativeVelocity.sqrMagnitude <= resistenciaMax )
+				{
+					Danificar();
+				}
+				else if(collision.relativeVelocity.sqrMagnitude > resistenciaMax)
+				{
+					ProcessarMorte();
+				}
+			}
+		}
     }
-	public void ProcesarMorte()
+	public void Danificar()
+	{
+		if (limite < sprites.Length - 1)
+        {
+            limite++;
+            spriteR.sprite = sprites[limite];
+			audioObj.clip = clips[0];
+			audioObj.Play();
+        }
+        else if(limite ==  sprites.Length - 1)
+        {
+			ProcessarMorte();
+        }
+	}
+	public void Damage(Rigidbody2D rigidB)
+	{
+        if ((rigidB.velocity.sqrMagnitude > resistenciaMin && rigidB.velocity.sqrMagnitude <=	resistenciaMax ) || rigidB.gameObject.CompareTag("Bomba"))
+        {
+            Danificar();
+        }
+        else if(rigidB.velocity.sqrMagnitude > resistenciaMax && ( rigidB.gameObject.CompareTag("Player") || rigidB.gameObject.CompareTag("clone")))
+        {
+			ProcessarMorte();  
+        }
+	}
+	public void ProcessarMorte()
 	{
 		if (vivo)
 		{
@@ -56,12 +82,10 @@ public class ImpactCod : MonoBehaviour
 			else
 			{
 				Instantiate(EfeitoScore5000, new Vector2(transform.position.x,transform.position.y), Quaternion.identity);
-                    
 			}
-			audioObj.clip = clips[1];
-			audioObj.Play();
+			AudioManager.instance._audioAmbient.PlayOneShot(clips[1]);
 			GameManager.instance.Score = Score;
-			Destroy(gameObject,.5f);
+			Destroy(gameObject);
 		}
 		
 	}
