@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6814945431387977162
 MonoBehaviour:
@@ -44,23 +44,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d416d78355a7e604a82b1dc37f8fd0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QtdPassaros: 0
-  passaroCarregado: 0
-  nomePassaro: 
-  passarosUsados: 0
-  passaroLancado: 0
-  pausado: 0
-  jogoComecou: 0
-  passaro: []
+  passaros: []
   rastroPrevio: {fileID: 0}
   posInicial: {fileID: 0}
-  objE: {fileID: 0}
+  CameraE: {fileID: 0}
   objD: {fileID: 0}
+  objetosDaCena: []
+  qtdPassaros: 0
   numPorcosCena: 0
-  DestrutiveisEmCena: 0
+  destrutiveisEmCena: 0
+  passarosUsados: 0
+  passaroName: 
+  pausado: 0
+  jogoComecou: 0
+  zeroMovimento: 0
+  continuarProcurando: 0
+  passaroCarregado: 0
+  passaroLancado: 0
+  passaroInDragging: 0
+  mira: 0
   ScoreMax: 0
   BestScore: 0
   moedas: 0
   estrelasObtidas: 0
   menuWinActive: 0
   menuLoseActive: 0
+  somLose: {fileID: 8300000, guid: c320eb9eb25db154cb937faf706f4a12, type: 3}
+  somWin: {fileID: 8300000, guid: aaa493d0632989f48b6272a56b894c3f, type: 3}

@@ -16,11 +16,10 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
 
-
 	public GameObject[] passaros;
 	public TrailRenderer rastroPrevio;
 	public Transform posInicial;
-	public Transform CameraE, objD;
+	public Transform CameraE, CameraD;
 	public Rigidbody2D[] objetosDaCena;
 
 	public int qtdPassaros;
@@ -28,16 +27,15 @@ public class GameManager : MonoBehaviour
 	public int destrutiveisEmCena;
 	public int passarosUsados = 0;
 	public string passaroName;
-
+	public Passaro passaroAtual;
 	//Control 
 	public bool pausado = false;
 	public bool jogoComecou;
 	public bool zeroMovimento;
 	public bool continuarProcurando;
 	public bool passaroCarregado;
-	public bool passaroLancado = false;
 	public bool passaroInDragging = false;
-
+	private bool acabaramPassaros = false;
 	//Objetos Control
 	public bool mira = false;
 	
@@ -47,7 +45,7 @@ public class GameManager : MonoBehaviour
 		set
 		{
 			_score += value;
-			UIManager.instance.AtualizarScore();
+			ScoreManager.instance.AtualizarScore();
 		}
 		get {	return _score; }
 	}
@@ -60,7 +58,9 @@ public class GameManager : MonoBehaviour
 	public bool menuWinActive;
 	public bool menuLoseActive;
 	
-
+	//Som
+	public AudioClip somLose;
+	public AudioClip somWin;
 
 	private void Awake()
 	{
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 	private void Update()
 	{
 		bool ganhou = numPorcosCena <= 0 && passaros.Length > 0;
-		bool perdeu = numPorcosCena > 0 && passarosUsados == qtdPassaros ;
+		bool perdeu = numPorcosCena > 0 && acabaramPassaros;
 		if(ganhou && continuarProcurando)
 		{
 			//a função ZeroMove é executada quando houve uma vitoria mas ainda pode ter pontuação para ganhar porque ela comprova se ainda há algum movimento em nos corpos rigidos (rigidbody2d)
@@ -110,18 +110,19 @@ public class GameManager : MonoBehaviour
 	
 	private	void StartGame()
 	{
+		Time.timeScale = 1.0f;
+		pausado = false;
 		jogoComecou = true;
+		acabaramPassaros = false;
 		passaroCarregado = false;
 		passarosUsados = 0;
-		passaroLancado = false;
 		menuLoseActive = false;
 		menuWinActive = false;
 		passaroInDragging = false;
 		_score = 0;
-		BestScore = PointManager.instance.BestScoreLoad(OndeEstou.instance.faseN);
+		BestScore = ScoreManager.instance.BestScoreLoad(OndeEstou.instance.faseN);
 		moedas =  CoinManager.instance.LoadDados();
-		UIManager.instance.AtualizarScore();
-		UIManager.instance.moedas.text = moedas.ToString();
+		ScoreManager.instance.AtualizarScore();
 	}
 	private void Carrega( Scene cena, LoadSceneMode mode )
 	{
@@ -130,12 +131,12 @@ public class GameManager : MonoBehaviour
 		{	
 			objetosDaCena = GameObject.FindObjectsOfType<Rigidbody2D>();
 
-			posInicial = GameObject.FindWithTag( "posInicial" ).GetComponent<Transform>();
-			objD = GameObject.FindWithTag( "CameraDir" ).GetComponent<Transform>();
-			CameraE = GameObject.FindWithTag( "CameraEsq" ).GetComponent<Transform>();
-			passaros = GameObject.FindGameObjectsWithTag( "Player" );
-			numPorcosCena = GameObject.FindGameObjectsWithTag( "InimigoPorco" ).Length;
-			destrutiveisEmCena = GameObject.FindGameObjectsWithTag( "Destrutivel" ).Length;
+			posInicial = GameObject.FindWithTag( Constants.POSINICIAL_TAG ).GetComponent<Transform>();
+			CameraD = GameObject.FindWithTag( Constants.CAMERADIR_TAG).GetComponent<Transform>();
+			CameraE = GameObject.FindWithTag( Constants.CAMERAESQ_TAG ).GetComponent<Transform>();
+			passaros = GameObject.FindGameObjectsWithTag( Constants.PLAYER_TAG );
+			numPorcosCena = GameObject.FindGameObjectsWithTag( Constants.INIMIGOPORCO_TAG ).Length;
+			destrutiveisEmCena = GameObject.FindGameObjectsWithTag( Constants.DESTRUTIVEL_TAG ).Length;
 
 			qtdPassaros = passaros.Length;
 			SelectionSortByPositionX(passaros, qtdPassaros);
@@ -188,7 +189,7 @@ public class GameManager : MonoBehaviour
 	//comproba que não tem passaro já carregado e nem passaro lancado que ainda pode estar fazendo dano.
 	private void RecargarPassaro()
 	{
-		if ( !passaroCarregado && !passaroLancado )
+		if ( !passaroCarregado )
 		{
 			if ( passarosUsados < passaros.Length )
 			{
@@ -197,16 +198,15 @@ public class GameManager : MonoBehaviour
 				{
 					passaroName = passaros[ passaroNumero ].name;
 					passaros[ passaroNumero ].transform.position = posInicial.position;
-					Drag passaroAtual = passaros[passaroNumero].GetComponent<Drag>();
-					passaroAtual.LineUpdate();
-					passaroAtual.lineBack.enabled = true;
-					passaroAtual.lineFront.enabled = true;
+					passaroAtual = passaros[passaroNumero].GetComponent<Passaro>();
+					Catapult.instance.LineUpdate();
+					Catapult.instance.LineRendererEnabled();
 					passaroCarregado = true;
 				}
 			}
 			else
 			{
-				//print("acabaram os passaros");
+				acabaramPassaros = true;
 				return;
 			}
 		}
@@ -217,8 +217,8 @@ public class GameManager : MonoBehaviour
 	{
 		jogoComecou = false;
 		menuLoseActive = true;
-		StartCoroutine(DelayAnim(UIManager.instance.painelGameOver, "Anim_MenuLose", 2f, AbrirMenu));
-		AudioManager.instance.PlayAudioLoseMenu();
+		PainelLose.instance.openMenu(2.0f);
+		AudioManager.instance.PlayEffect(somLose);
 	}
 	//Processo de Ganhar
 	IEnumerator WinGame()
@@ -228,41 +228,25 @@ public class GameManager : MonoBehaviour
 		menuWinActive = true;
 		continuarProcurando = true;
 		yield return new WaitUntil(() => zeroMovimento);
+
 		continuarProcurando = false;
 		
 		//Animações
 		estrelasObtidas = CalcularEstrelasComPontuacao();
-		EstrelasAnimController.instance.Qtd = estrelasObtidas;
-		EstrelasAnimController.instance.IniciarCoroutine();
-		StartCoroutine(DelayAnim(UIManager.instance.painelWin, "Anim_MenuWin", 2f, AbrirMenu));
+		PainelWin.instance.openMenu(2.0f,estrelasObtidas);
 
 		//Som
-		AudioManager.instance.PlayAudioWinMenu();
+		AudioManager.instance.PlayEffect(somWin);
 
 		//Saves
 		SaveLevelStars();
-		CoinManager.instance.SalvarDados(moedas);
-		PointManager.instance.BestScoreSave(OndeEstou.instance.faseN, _score);
+		CoinManager.instance.SalvarDados(CoinManager.instance.GetMoneyTemp());
+		ScoreManager.instance.BestScoreSave(OndeEstou.instance.faseN, _score);
 
 		//Liberar ProximaFase
 		int levelProximo = OndeEstou.instance.fase + 1;
 		ZPlayerPrefs.SetInt("Level" + levelProximo + "_" + OndeEstou.instance.faseMestra, 1);
 	}
-	// ------------------------- Delay para as animações----------------------------
-	public delegate void Del(Animator anim, string nomeAnim);
-	public static void AbrirMenu(Animator anim, string nomeAnim )
-	{
-		anim.Play(nomeAnim);
-		UIManager.instance.fundoPreto.enabled = true;
-		UIManager.instance.LineRendererDisabled();
-	}
-	IEnumerator DelayAnim(Animator anim, string nome, float seg, Del callback)
-	{
-		yield return new WaitForSeconds(seg);
-		callback(anim, nome);
-		yield return null;
-	}// ------------------------- Fim Delay para as animações----------------------------
-
 	//Calculo com base a pocentagem obtida do total score que pode ser conseguido
 	private int CalcularEstrelasComPontuacao()
 	{
@@ -301,6 +285,7 @@ public class GameManager : MonoBehaviour
 	// Este é um metodo geral para programar o que fazer caso seja descarregada a cena
 	private void Descarregar(Scene current)
 	{
+		StopAllCoroutines();
 		//Asegura que todas as animações que estejam rodando sejam destruidas
 		DOTween.KillAll();
 	}

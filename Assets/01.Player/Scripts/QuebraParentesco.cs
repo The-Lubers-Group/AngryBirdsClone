@@ -10,7 +10,7 @@ public class QuebraParentesco : MonoBehaviour
 	}
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Untagged"))
+        if (collision.gameObject.CompareTag("Untagged") ||collision.gameObject.CompareTag(Constants.DESTRUTIVEL_TAG))
         {
             transform.DetachChildren();
         }

@@ -100,7 +100,7 @@ public class BombaPassaro : MonoBehaviour
 			}
 		}
 		passaroRB.gameObject.tag = tagTemp;
-	
+		GameManager.instance.passaroAtual.continueToRecharge();
 	}
 	//private void OnDrawGizmos()
 	//{

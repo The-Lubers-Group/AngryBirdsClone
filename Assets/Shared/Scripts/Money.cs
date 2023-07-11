@@ -20,4 +20,13 @@ public class Money : MonoBehaviour
 	{
 		textMoeda.text = CoinManager.instance.LoadDados().ToString();
 	}
+	public void AddTemporalMoney(int amount )
+	{
+		int valorLocal = int.Parse(textMoeda.text) + amount;
+		textMoeda.text = valorLocal.ToString();
+	}
+	public int GetMoneyTemp()
+	{
+		return int.Parse(textMoeda.text);
+	}
 }

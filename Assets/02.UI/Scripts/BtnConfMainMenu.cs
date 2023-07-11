@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BtnConf : MonoBehaviour
+public class BtnConfMainMenu : MonoBehaviour
 {
-    public static BtnConf instance;
     public bool liga = false;
     public Animator animaConf;
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
+        animaConf = GetComponentInChildren<Animator>();
+		GetComponent<Button>().onClick.AddListener(ClickBTN);
     }
+
     public void ClickBTN()
     {
         liga = !liga;
@@ -26,4 +25,5 @@ public class BtnConf : MonoBehaviour
             animaConf.Play("MoveUIConfInverse");
         }
     }
+	
 }

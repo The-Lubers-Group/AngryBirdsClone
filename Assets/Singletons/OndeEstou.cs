@@ -20,9 +20,17 @@ public class OndeEstou : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
+		
+	}
+	private void OnEnable()
+	{
 		SceneManager.sceneLoaded += VerificaFase;
 	}
+	private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= VerificaFase;
 
+    }
 	void VerificaFase(Scene cena, LoadSceneMode modo) 
 	{
 		fase = SceneManager.GetActiveScene().buildIndex;

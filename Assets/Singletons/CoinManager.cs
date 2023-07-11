@@ -1,60 +1,35 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 using TMPro;
 
 public class CoinManager : MonoBehaviour
 {
 	public static CoinManager instance;
 	public Money moneyDisplay = null;
-	public TextMeshProUGUI textLoja;
+	public TextMeshProUGUI notificationText;
 	public Animator animatorTextLoja;
 	private void Awake()
 	{
-		if (instance == null )
-		{
-			instance = this;
-			DontDestroyOnLoad( this.gameObject );
-		}
-		else
-		{
-			Destroy(this.gameObject);
-		}
-		
+		instance = this;
+		moneyDisplay = GetComponentInChildren<Money>();
 	}
-	private void OnEnable()
+	public void Start()
 	{
-		SceneManager.sceneLoaded += Carrega;
-	}
-	private void OnDisable()
-	{
-		SceneManager.sceneLoaded -= Carrega;
-	}
-	private void Carrega(Scene cena, LoadSceneMode modo)
-	{
-		if(cena.name == "Loja" || cena.name == "MenuFases")
+		if (OndeEstou.instance.faseN == "Loja")
 		{
-			moneyDisplay = GameObject.FindWithTag("UIMoeda").GetComponent<Money>();
-			if (cena.name == "Loja")
-			{
-				textLoja = GameObject.FindWithTag("UILojaText").GetComponent<TextMeshProUGUI>();
-				animatorTextLoja = textLoja.GetComponent<Animator>();
-			}
+			notificationText = GameObject.FindWithTag("UILojaText").GetComponent<TextMeshProUGUI>();
+			animatorTextLoja = notificationText.GetComponent<Animator>();
 		}
-		
 	}
-	public void SalvarDados(int moeda )
+	public void SalvarDados(int moedas)
 	{
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream fs = File.Create(Application.persistentDataPath + "/dadoscoinData.data");
 
 		Dados coin = new Dados();
-		coin.moedas = moeda;
+		coin.moedas = moedas;
 
 		bf.Serialize(fs, coin);
 		fs.Close();
@@ -80,24 +55,36 @@ public class CoinManager : MonoBehaviour
 		novoVal = tempMoedasTotal - valor;
 		SalvarDados(novoVal);
 		moneyDisplay?.AtualizaValor();
-		textLoja.text = "Comprado";
-		animatorTextLoja.Play("notificationAnim");
+		if( notificationText != null)
+		{
+			notificationText.text = "Comprado";
+			animatorTextLoja.Play("notificationAnim");
+		}	
 	}
 	public void NotMoney()
 	{
-		textLoja.text = "Moedas Insuficientes";
-		animatorTextLoja.Play("notificationAnim");
+		if( notificationText != null)
+		{
+			notificationText.text = "Moedas Insuficientes";
+			animatorTextLoja.Play("notificationAnim");
+		}
 	}
 
 	public void setText(string txt)
 	{
-		textLoja.text = txt;
+		if( notificationText != null)
+		{
+			notificationText.text = txt;
+		}
+	}
+	public int GetMoneyTemp()
+	{
+		return moneyDisplay.GetMoneyTemp();
 	}
 
 	[Serializable]
 	class Dados
 	{
-
 		public int moedas;
 	}
 }

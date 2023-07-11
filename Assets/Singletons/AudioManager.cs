@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class AudioManager : MonoBehaviour
 {
 	public static AudioManager instance;
-	public AudioSource _audioAmbient, _audioWinMenu, _audioLoseMenu;
-
+	public AudioSource _audioAmbient, _audioFX;
+	public bool somActivo = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -22,26 +19,6 @@ public class AudioManager : MonoBehaviour
 		{
 			Destroy( this.gameObject );
 		}
-		
-		_audioAmbient = GetComponent<AudioSource>();
-	}
-	private void OnEnable()
-	{
-		SceneManager.sceneLoaded += Carrega;
-	}
-	private void Carrega(Scene cena,  LoadSceneMode modo)
-	{	
-		Regex rx = new Regex(@"Level[0-9]{1}");
-
-		if ( rx.Match( cena.name ).Success )
-		{
-			_audioWinMenu = GameObject.FindWithTag("UIMenuWin").GetComponent<AudioSource>();
-			_audioLoseMenu = GameObject.FindWithTag("UIMenuLose").GetComponent<AudioSource>();
-		}
-	}
-	private void OnDisable()
-	{
-		SceneManager.sceneLoaded -= Carrega;
 	}
 	private void Start()
 	{
@@ -55,20 +32,9 @@ public class AudioManager : MonoBehaviour
 			_audioAmbient.Play();
 		}
     }
-	public void PlayAudioWinMenu()
+	public void PlayEffect(AudioClip clip)
 	{
-		if ( !_audioWinMenu.isPlaying )
-		{
-			_audioWinMenu.PlayOneShot(_audioWinMenu.clip);
-		}
-	}
-	public void PlayAudioLoseMenu()
-	{
-		if ( !_audioLoseMenu.isPlaying )
-		{
-			
-			_audioLoseMenu.PlayOneShot(_audioLoseMenu.clip);
-		}
+		_audioFX.PlayOneShot(clip);
 	}
 	public void PauseAll()
 	{

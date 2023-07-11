@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class btnAudioToggleIcon : MonoBehaviour
+public class BtnAudioToggle : MonoBehaviour
 {
 	public Sprite iconNotSound;
 	public Sprite iconSound;
@@ -15,7 +15,7 @@ public class btnAudioToggleIcon : MonoBehaviour
 	}
 	private void determinarIcon()
 	{
-		if ( UIManager.instance.somActivo )
+		if ( AudioManager.instance.somActivo )
 		{
 			img.sprite = iconSound;
 		}
@@ -30,12 +30,12 @@ public class btnAudioToggleIcon : MonoBehaviour
 		if (AudioListener.pause)
 		{
 			img.sprite = iconNotSound;
-			UIManager.instance.somActivo = false;
+			AudioManager.instance.somActivo = false;
 		}
 		else
 		{
 			img.sprite = iconSound;
-			UIManager.instance.somActivo = true;
+			AudioManager.instance.somActivo = true;
 		}
 	}
 

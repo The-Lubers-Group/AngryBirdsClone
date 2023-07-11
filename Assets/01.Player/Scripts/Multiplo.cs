@@ -35,17 +35,14 @@ public class Multiplo : MonoBehaviour
         if(Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Ended && trava < 2 && !passaroRb.isKinematic)
+            if(touch.phase == TouchPhase.Ended && trava == 0 && !passaroRb.isKinematic)
             {
-                trava++;
-                if(trava == 2)
-                {
+
                     start = transform.position;
-                
                     pass1 = Instantiate(passPrefab, new Vector3(start.x,start.y + 0.1f, start.z), Quaternion.identity);
                     pass2 = Instantiate(passPrefab, new Vector3(start.x,start.y + 0.1f, start.z), Quaternion.identity);
                     libera = true;
-                }
+					trava = 1;
             }
         }
         #endif

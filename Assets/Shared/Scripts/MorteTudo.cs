@@ -16,13 +16,4 @@ public class MorteTudo : MonoBehaviour
         yield return new WaitForSeconds(morteTime);
         Destroy(gameObject);
     }
-	private void OnTriggerEnter2D( Collider2D collision )
-	{
-		if ( collision.gameObject.CompareTag( "moeda" ) )
-		{
-			GameManager.instance.moedas += 50;
-			UIManager.instance.moedas.text = GameManager.instance.moedas.ToString();
-			Destroy(collision.gameObject);
-		}
-	}
 }

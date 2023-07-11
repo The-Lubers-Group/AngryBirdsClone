@@ -21,7 +21,7 @@ public class UsableObjectsManager : MonoBehaviour
 		{
 			Destroy( this.gameObject );
 		}
-		objects = GameObject.FindObjectsOfType<UsableObject>();
+
 	}
 	//Indica ao game manager para ativar o objeto
 	public void SetActiveObject( UsableObjectsEnum obj )

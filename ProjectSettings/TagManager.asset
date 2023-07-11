@@ -5,47 +5,21 @@ TagManager:
   serializedVersion: 2
   tags:
   - Passaro
-  - btnBlock
-  - nomeGame
-  - canvasBack
-  - infoTxt
   - posInicial
-  - CatapultLB
-  - CatapultLF
   - CameraDir
   - CameraEsq
-  - clone
   - InimigoPorco
   - Destrutivel
-  - UIScore
-  - UIBestScore
-  - UIMoeda
-  - moeda
-  - UIFundoPreto
-  - UIMenuLose
-  - UIMenuPause
-  - UIMenuWin
-  - UITextStarsMestre1
-  - UITextStarsMestre2
-  - UITextScoreMestre1
-  - UITextScoreMestre2
-  - UIAnimConfMainMenu
-  - UIAnimMaisJogosMainMenu
-  - UIBtnConfMainMenu
-  - UIBtnLojaMainMenu
-  - UIBtnPlayMainMenu
-  - UIBtnCloseCreditsMainMenu
-  - UIBtnInicial
-  - UIBtnBackLoja
-  - UIBtnBackFases
-  - UIBtnBackLevel
-  - UIBtnInfoMainMenu
-  - UIBtnSoundMainMenu
-  - MorreX
   - MorteArea
-  - dots
-  - UILojaText
+  - Floor
   - Bomba
+  - Clone
+  - Moeda
+  - dots
+  - UIFundoPreto
+  - UIMoeda
+  - CatapultLB
+  - CatapultLF
   layers:
   - Default
   - TransparentFX
@@ -55,7 +29,7 @@ TagManager:
   - UI
   - Passaro
   - Catapult
-  - 
+  - PassaroBlock
   - 
   - 
   - 

@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 8721956866218544547}
   - component: {fileID: 8112813336996299378}
   - component: {fileID: 8213751900964225461}
-  - component: {fileID: 4267704465108950755}
   - component: {fileID: 4182362495247750465}
-  - component: {fileID: 1189738136266100045}
   - component: {fileID: 236823883264765404}
+  - component: {fileID: 6726684092134154662}
   m_Layer: 6
   m_Name: AngryBirdMultiplica
   m_TagString: Player
@@ -37,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 7516365376197284417}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8721956866218544547
 SpriteRenderer:
@@ -153,37 +152,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4267704465108950755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316738035966445845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d38ccf3bd8bb1a4c9f02fbee036bd04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passaroLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  tempoParaMorrer: 1
-  estaMorrendo: 0
-  estouAtivo: 0
-  picked: 0
-  frequencia: 8
-  lineFront: {fileID: 0}
-  lineBack: {fileID: 0}
-  valorCondLimiteX: -5.5
-  valorCondLimiteY: -5
-  catapultRB: {fileID: 0}
-  esticamentoMin: 1
-  efeitoDeMorte: {fileID: 6094921971044385432, guid: 6528edb0497bfef4ca285f227f35ce52, type: 3}
-  audioPassaro: {fileID: 0}
-  audioMortePassaro: {fileID: 2261819017381636929, guid: 97163e83738fbf64fa65838cd1a7fd74, type: 3}
-  dotPrefab: {fileID: 6782993242019863121, guid: 377d94f3a56b9824d9d925f4dda8b8d0, type: 3}
-  pointsNum: 30
 --- !u!114 &4182362495247750465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,102 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153905505440aff4f82ee61eca315183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &1189738136266100045
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316738035966445845}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 18a789c3fd6622b4aab217874164794e, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &236823883264765404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +181,34 @@ MonoBehaviour:
   passaroRb: {fileID: 0}
   passPrefab: {fileID: 8213751900964225461, guid: 4c60966e5084fcd4899904d3ccda81aa, type: 3}
   trava: 0
+--- !u!114 &6726684092134154662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316738035966445845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b7d02e019759740ab81c2a993c27fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passaroCol: {fileID: 0}
+  passaroLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  tempoParaMorrer: 1
+  estaMorrendo: 0
+  estouAtivo: 0
+  initialDistance: 0
+  passaroLancado: 0
+  clicked: 0
+  frequencia: 8
+  distanceDragged: 0
+  esticamentoMin: 1
+  efeitoDeMorte: {fileID: 6094921971044385432, guid: 6528edb0497bfef4ca285f227f35ce52, type: 3}
+  audioPassaro: {fileID: 8300000, guid: 18a789c3fd6622b4aab217874164794e, type: 3}
+  audioMortePassaro: {fileID: 8300000, guid: 44a7ff5285a1ba742953a4b02cd01347, type: 3}
 --- !u!1 &2330466053971957294
 GameObject:
   m_ObjectHideFlags: 0

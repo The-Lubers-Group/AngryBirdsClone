@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 5481144015157875786}
   - component: {fileID: 4105586460463388359}
   - component: {fileID: 3333459463759161648}
+  - component: {fileID: 6710816698536633733}
   - component: {fileID: 5663308559438735185}
   m_Layer: 5
   m_Name: miraObjects
@@ -343,6 +344,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6710816698536633733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300347399896468561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21341b1d0c756894e99eb100d9e0a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mirando: 0
+  dotsContainer: {fileID: 0}
+  dotPrefab: {fileID: 6782993242019863121, guid: 377d94f3a56b9824d9d925f4dda8b8d0, type: 3}
+  pointsNum: 30
 --- !u!114 &5663308559438735185
 MonoBehaviour:
   m_ObjectHideFlags: 0

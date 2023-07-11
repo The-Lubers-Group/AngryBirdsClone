@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5385257416600428980}
   m_Layer: 0
   m_Name: Moeda
-  m_TagString: moeda
+  m_TagString: Moeda
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -32,7 +32,7 @@ public class ImpactCod : MonoBehaviour, IDamageable
 		}
 		else
 		{
-			if(collision.gameObject.name == "Floor" )
+			if(collision.gameObject.CompareTag(Constants.FLOOR_TAG) )
 			{
 				if(collision.relativeVelocity.sqrMagnitude > 16 && collision.relativeVelocity.sqrMagnitude <= resistenciaMax )
 				{
@@ -61,11 +61,11 @@ public class ImpactCod : MonoBehaviour, IDamageable
 	}
 	public void Damage(Rigidbody2D rigidB)
 	{
-        if ((rigidB.velocity.sqrMagnitude > resistenciaMin && rigidB.velocity.sqrMagnitude <=	resistenciaMax ) || rigidB.gameObject.CompareTag("Bomba"))
+        if ((rigidB.velocity.sqrMagnitude > resistenciaMin && rigidB.velocity.sqrMagnitude <=	resistenciaMax ) || rigidB.gameObject.CompareTag(Constants.BOMB_TAG))
         {
             Danificar();
         }
-        else if(rigidB.velocity.sqrMagnitude > resistenciaMax && ( rigidB.gameObject.CompareTag("Player") || rigidB.gameObject.CompareTag("clone")))
+        else if(rigidB.velocity.sqrMagnitude > resistenciaMax && ( rigidB.gameObject.CompareTag("Player") || rigidB.gameObject.CompareTag(Constants.CLONE_TAG)))
         {
 			ProcessarMorte();  
         }
@@ -83,7 +83,7 @@ public class ImpactCod : MonoBehaviour, IDamageable
 			{
 				Instantiate(EfeitoScore5000, new Vector2(transform.position.x,transform.position.y), Quaternion.identity);
 			}
-			AudioManager.instance._audioAmbient.PlayOneShot(clips[1]);
+			AudioManager.instance.PlayEffect(clips[1]);
 			GameManager.instance.Score = Score;
 			Destroy(gameObject);
 		}

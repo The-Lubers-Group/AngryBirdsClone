@@ -1,26 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class MoveTxtInfo : MonoBehaviour
 {
     private Vector3 pos;
     private RectTransform rt;   
     private bool libera= false;
-    private GameObject btnBlock, nomeGame;
-    private RectTransform uiRect1, uiRect2;
+    public RectTransform canvasBack;
 
     private void Awake()
     {
-        uiRect1 = GameObject.FindWithTag("canvasBack").GetComponent<RectTransform>();
-        uiRect2 = GameObject.FindWithTag("infoTxt").GetComponent<RectTransform>();
+
         rt = GetComponent<RectTransform>();
         pos = rt.anchoredPosition;
-        btnBlock =GameObject.FindWithTag("btnBlock");
-        btnBlock.SetActive(false);
-        nomeGame = GameObject.FindWithTag("nomeGame");
-		btnBlock.GetComponent<Button>().onClick.AddListener(BlockMove);
+
     }
 
     // Update is called once per frame
@@ -35,22 +28,18 @@ public class MoveTxtInfo : MonoBehaviour
             rt.anchoredPosition = pos;
         }
 
-        if(!RectOverlap(uiRect1, uiRect2))
+        if(!RectOverlap(canvasBack, rt))
         {
             rt.anchoredPosition = pos;
         }
     }
     public void LiberaMove()
     {
-        btnBlock.SetActive(true);
-        nomeGame.SetActive(false);
         libera = true;
-        UIManager.instance.PlayAnimBtnConf();
+       
     }
     public void BlockMove()
     {
-        btnBlock.SetActive(false);
-        nomeGame.SetActive(true);
         libera = false;
     }
     bool RectOverlap(RectTransform rectTrans1, RectTransform rectTrans2)

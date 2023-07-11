@@ -1,21 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class PointManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
-	public static PointManager instance;
+	public static ScoreManager instance;
+	public TextMeshProUGUI score, bestScore;
+
 	private void Awake()
 	{
-		if(instance == null )
-		{
-			instance = this;
-			DontDestroyOnLoad( this.gameObject );
-		}
-		else
-		{
-			Destroy(this.gameObject);
-		}
+		instance = this;
 	}
 	public void BestScoreSave(string level, int pt )
 	{
@@ -41,5 +36,15 @@ public class PointManager : MonoBehaviour
 			return 0;
 		}
 		
+	}
+	public void AtualizarScore()
+	{
+		int novoScore = GameManager.instance.Score;
+		score.text = novoScore.ToString();
+		bestScore.text = GameManager.instance.BestScore.ToString();
+		if (novoScore > int.Parse(bestScore.text))
+		{
+			bestScore.text = score.text;
+		}
 	}
 }
